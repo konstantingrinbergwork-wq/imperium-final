@@ -1,0 +1,10 @@
+[2025-09-14 12:51:10] Starting Master Smoke Test for MVP Autonomy
+[2025-09-14 12:51:10] Report will be saved to: /opt/imperium/adapt_pack/ops/reports/master_smoke_20250914-125110.log
+[2025-09-14 12:51:10] === Testing Database Health ===
+✓ Database connectivity OK
+✓ health_snapshot() function working
+ℹ Health data:  ok
+⚠ Imperium schema not found
+[2025-09-14 12:51:10] === Testing RAG Gateway Service ===
+✗ RAG Gateway service is not running
+ℹ Start with: sudo systemctl start rag-gateway.service

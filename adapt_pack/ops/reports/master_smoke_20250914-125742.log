@@ -1,0 +1,21 @@
+[2025-09-14 12:57:42] Starting Master Smoke Test for MVP Autonomy
+[2025-09-14 12:57:42] Report will be saved to: /opt/imperium/adapt_pack/ops/reports/master_smoke_20250914-125742.log
+[2025-09-14 12:57:42] === Testing Database Health ===
+✓ Database connectivity OK
+✓ health_snapshot() function working
+ℹ Health data:  ok
+⚠ Imperium schema not found
+[2025-09-14 12:57:42] === Testing RAG Gateway Service ===
+✓ RAG Gateway service is active
+✓ RAG Gateway health endpoint responding
+ℹ Health response: {"status":"healthy","embedding_adapter":"local-fake","vector_dimension":1536,"timestamp":"2025-09-14T12:57:42.460965"}
+✓ Embedding endpoint functional
+ℹ Embed test passed
+[2025-09-14 12:57:42] === Testing System Components ===
+⚠ View winf_latest_context not accessible or doesn't exist
+⚠ View winf_vector_lens not accessible or doesn't exist
+⚠ View winf_adm_stats not accessible or doesn't exist
+✓ Required Python packages installed
+[2025-09-14 12:57:43] === Generating Final Report ===
+✓ Report generated: /opt/imperium/adapt_pack/ops/reports/master_smoke_summary_20250914-125743.txt
+✓ MVP AUTONOMY SMOKE TEST PASSED

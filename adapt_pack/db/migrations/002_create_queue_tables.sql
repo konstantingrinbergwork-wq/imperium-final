@@ -1,0 +1,30 @@
+-- Main job queue with partitioning support
+CREATE TABLE queue.jobs (
+    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    queue_name TEXT NOT NULL DEFAULT 'default',
+    payload JSONB NOT NULL,
+    status TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'processing', 'completed', 'failed', 'dead_letter')),
+    priority INTEGER NOT NULL DEFAULT 0,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    scheduled_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    started_at TIMESTAMPTZ,
+    completed_at TIMESTAMPTZ,
+    lease_token UUID,
+    lease_expires_at TIMESTAMPTZ,
+    attempts INTEGER NOT NULL DEFAULT 0,
+    max_attempts INTEGER NOT NULL DEFAULT 5,
+    retry_delay INTERVAL NOT NULL DEFAULT '30 seconds',
+    next_retry_at TIMESTAMPTZ,
+    last_error TEXT,
+    error_count INTEGER NOT NULL DEFAULT 0,
+    source_node_id UUID,
+    target_node_id UUID,
+    replication_lag INTERVAL
+) PARTITION BY RANGE (created_at);
+
+CREATE INDEX idx_jobs_queue_status_scheduled ON queue.jobs (queue_name, status, scheduled_at) 
+    WHERE status = 'pending';
+CREATE INDEX idx_jobs_processing_lease ON queue.jobs (status, lease_expires_at) 
+    WHERE status = 'processing';
+CREATE INDEX idx_jobs_pending_priority ON queue.jobs (priority DESC, created_at ASC) 
+    WHERE status = 'pending';
