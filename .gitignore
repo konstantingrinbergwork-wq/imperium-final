@@ -1,0 +1,53 @@
+# Logs and runtime data
+logs/
+*.log
+*.log.*
+*.log.gz
+
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+*.egg-info/
+
+# Node.js
+node_modules/
+npm-debug.log*
+
+# Monitoring data
+ops/prometheus/data/
+ops/**/data/
+*.prom
+
+# Backups and dumps  
+backups/
+dumps/
+*.dump
+*.sql.bak
+*.tar.gz
+*.zip
+*.rar
+
+# Temporary files
+*.tmp
+*.swp
+*.bak
+.DS_Store
+Thumbs.db
+
+# Secrets and sensitive
+.env
+*.secret
+*password*
+*jwt*
+*token*
+*.key
+*.pem
+
+# IDE
+.vscode/
+.idea/
+*.sublime-*
